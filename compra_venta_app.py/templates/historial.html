@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi historial</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {% extends 'layout.html' %}
+
+{% block title %}Mi historial{% endblock %}
+
+{% block content %}
+<h1>Historial de {{ usuario.username }}</h1>
+<h2>Productos publicados</h2>
+{% for producto in productos %}
+    <div>
+        <strong>{{ producto.nombre }}</strong> - {{ producto.descripcion }}
+    </div>
+{% endfor %}
+<h2>Comentarios</h2>
+{% for comentario in comentarios %}
+    <div>{{ comentario.texto }}</div>
+{% endfor %}
+<h2>Reseñas</h2>
+{% for resena in resenas %}
+    <div>{{ resena.texto }}</div>
+{% endfor %}
+<h2>Imágenes</h2>
+{% for imagen in imagenes %}
+    <img src="{{ url_for('static', filename='uploads/' ~ imagen.archivo) }}" width="100">
+{% endfor %}
+<h2>Ofertas</h2>
+{% for oferta in ofertas %}
+    <div>{{ oferta.monto }}</div>
+{% endfor %}
+<h2>Pagos</h2>
+{% for pago in pagos %}
+    <div>{{ pago.monto }} - {{ pago.estado }}</div>
+{% endfor %}
+<h2>Transacciones</h2>
+{% for transaccion in transacciones %}
+    <div>{{ transaccion.estado }} - {{ transaccion.fecha }}</div>
+{% endfor %}
+<h2>Verificaciones</h2>
+{% for verificacion in verificaciones %}
+    <div>{{ verificacion.tipo }}: {{ verificacion.valor }} - {{ 'Verificado' if verificacion.verificado else 'No verificado' }}</div>
+{% endfor %}
+{% endblock %}
+    <a href="{{ url_for('index') }}">Volver al inicio</a>
+</body>
+</html>
