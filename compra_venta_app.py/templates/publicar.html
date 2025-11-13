@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Publicar producto</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Publicar producto</h1>
+{% extends 'layout.html' %}
+{% block content %}
+<h2>Publicar producto</h2>
+<form method="post">
+  <label>Nombre: <input type="text" name="nombre" required></label><br>
+  <label>Descripción: <textarea name="descripcion" required></textarea></label><br>
+  <label>Precio: <input type="number" name="precio" step="0.01" required></label><br>
+  <label>Estado: <input type="text" name="estado" required></label><br>
+  <label>Categoría:
+    <select name="categoria" required>
+      {% for c in categorias %}
+        <option value="{{ c.id }}">{{ c.nombre }}</option>
+      {% endfor %}
+    </select>
+  </label><br>
+  <button type="submit">Publicar</button>
+</form>
+{% endblock %}
+    <a href="{{ url_for('index') }}">Volver al inicio</a>
+</body>
+</html>
